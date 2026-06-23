@@ -1,3 +1,8 @@
-/home/paulo/Documents/GitHub/beauty-scheduler/backend/src/main/java/com/paulo/beauty_scheduler/BeautySchedulerApplication.java
-/home/paulo/Documents/GitHub/beauty-scheduler/backend/src/main/java/com/paulo/beauty_scheduler/enums/UserRole.java
-/home/paulo/Documents/GitHub/beauty-scheduler/backend/src/main/java/com/paulo/beauty_scheduler/model/User.java
+C:\Users\tecnologia8\Documents\beauty-scheduler\backend\src\main\java\com\paulo\beauty_scheduler\BeautySchedulerApplication.java
+C:\Users\tecnologia8\Documents\beauty-scheduler\backend\src\main\java\com\paulo\beauty_scheduler\controller\UserController.java
+C:\Users\tecnologia8\Documents\beauty-scheduler\backend\src\main\java\com\paulo\beauty_scheduler\dto\CreateUserDto.java
+C:\Users\tecnologia8\Documents\beauty-scheduler\backend\src\main\java\com\paulo\beauty_scheduler\entity\User.java
+C:\Users\tecnologia8\Documents\beauty-scheduler\backend\src\main\java\com\paulo\beauty_scheduler\enums\UserRole.java
+C:\Users\tecnologia8\Documents\beauty-scheduler\backend\src\main\java\com\paulo\beauty_scheduler\mapper\UserMapper.java
+C:\Users\tecnologia8\Documents\beauty-scheduler\backend\src\main\java\com\paulo\beauty_scheduler\repository\UserRepository.java
+C:\Users\tecnologia8\Documents\beauty-scheduler\backend\src\main\java\com\paulo\beauty_scheduler\service\UserService.java

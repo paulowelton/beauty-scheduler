@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.paulo.beauty_scheduler.dto.CreateUserDto;
 import com.paulo.beauty_scheduler.entity.User;
+import com.paulo.beauty_scheduler.enums.UserRole;
 import com.paulo.beauty_scheduler.mapper.UserMapper;
 import com.paulo.beauty_scheduler.repository.UserRepository;
 
@@ -25,6 +26,8 @@ public class UserService {
 
     public User create(CreateUserDto dto) {
         User user = mapper.toEntity(dto);
+
+        user.setRole(UserRole.CUSTOMER);
 
         return repository.save(user);
     }
