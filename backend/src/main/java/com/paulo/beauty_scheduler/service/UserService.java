@@ -1,6 +1,7 @@
 package com.paulo.beauty_scheduler.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,10 @@ public class UserService {
     public List<User> getAll() {
         // getting all users
         return repository.findAll();
+    }
+
+    public Optional<User> getByid(Long id) {
+        return repository.findById(id);
     }
 
     public User create(CreateUserDto dto) {
