@@ -4,11 +4,15 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.paulo.beauty_scheduler.dto.CreateUserDto;
 import com.paulo.beauty_scheduler.dto.UpdateUserDto;
 import com.paulo.beauty_scheduler.entity.User;
 import com.paulo.beauty_scheduler.service.UserService;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,5 +48,11 @@ public class UserController {
     @PatchMapping("/{id}")
     public User putUser(@PathVariable Long id, @RequestBody UpdateUserDto dto) {
         return service.patch(id, dto);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
     }
 }
