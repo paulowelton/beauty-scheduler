@@ -7,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.paulo.beauty_scheduler.dto.CreateUserDto;
+import com.paulo.beauty_scheduler.dto.UpdateUserDto;
 import com.paulo.beauty_scheduler.entity.User;
 import com.paulo.beauty_scheduler.enums.UserRole;
 import com.paulo.beauty_scheduler.mapper.UserMapper;
@@ -45,5 +46,14 @@ public class UserService {
 
         // saving user in database
         return repository.save(user);
+    }
+
+    public User patch(Long id, UpdateUserDto dto) {
+        User user = repository.findById(id)
+            .orElseThrow(() -> new RuntimeException("User not found"));
+
+        mapper.updateUserFromDto(dto, user);
+
+        return user;
     }
 }
