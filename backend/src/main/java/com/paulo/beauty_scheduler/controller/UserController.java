@@ -1,15 +1,17 @@
 package com.paulo.beauty_scheduler.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.paulo.beauty_scheduler.dto.CreateUserDto;
 import com.paulo.beauty_scheduler.dto.UpdateUserDto;
+import com.paulo.beauty_scheduler.dto.UserResponseDto;
 import com.paulo.beauty_scheduler.entity.User;
 import com.paulo.beauty_scheduler.service.UserService;
+
+import jakarta.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,22 +33,22 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> getAllUsers() {
+    public List<UserResponseDto> getAllUsers() {
         return service.getAll();
     }
 
     @GetMapping("/{id}")
-    public Optional<User> getUserById(@PathVariable Long id) {
+    public UserResponseDto getUserById(@PathVariable Long id) {
         return service.getByid(id);
     }
 
     @PostMapping
-    public User createUser(@RequestBody CreateUserDto dto) {
+    public UserResponseDto createUser(@RequestBody @Valid CreateUserDto dto) {
         return service.create(dto);
     }
     
     @PatchMapping("/{id}")
-    public User putUser(@PathVariable Long id, @RequestBody UpdateUserDto dto) {
+    public UserResponseDto putUser(@PathVariable Long id, @RequestBody @Valid UpdateUserDto dto) {
         return service.patch(id, dto);
     }
 

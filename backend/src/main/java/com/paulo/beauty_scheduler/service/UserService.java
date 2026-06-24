@@ -1,13 +1,14 @@
 package com.paulo.beauty_scheduler.service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.paulo.beauty_scheduler.dto.CreateUserDto;
 import com.paulo.beauty_scheduler.dto.UpdateUserDto;
+import com.paulo.beauty_scheduler.dto.UserResponseDto;
 import com.paulo.beauty_scheduler.entity.User;
 import com.paulo.beauty_scheduler.enums.UserRole;
 import com.paulo.beauty_scheduler.mapper.UserMapper;
@@ -25,39 +26,56 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public List<User> getAll() {
-        // getting all users
-        return repository.findAll();
+    public List<UserResponseDto> getAll() {
+        // get all users
+        List<User> users = repository.findAll();
+
+        List<UserResponseDto> responseUsers = new ArrayList<>();
+
+        for (User user : users) {
+            responseUsers.add(mapper.toResponseDto(user));
+        }
+
+        return responseUsers;
     }
 
-    public Optional<User> getByid(Long id) {
-        return repository.findById(id);
+    public UserResponseDto getByid(Long id) {
+        // get user by id
+        User user = repository.findById(id)
+            .orElseThrow(() -> new RuntimeException("user not found"));
+
+        return mapper.toResponseDto(user);
     }
 
-    public User create(CreateUserDto dto) {
-        // dto to object
+    public UserResponseDto create(CreateUserDto dto) {
+        // tranform dto to object
         User user = mapper.toEntity(dto);
 
-        // setting crypted password
+        // set crypted password
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
 
-        // setting user role
+        // set user role
         user.setRole(UserRole.CUSTOMER);
 
-        // saving user in database
-        return repository.save(user);
+        // save user in database
+        repository.save(user);
+
+        return mapper.toResponseDto(user);
     }
 
-    public User patch(Long id, UpdateUserDto dto) {
+    public UserResponseDto patch(Long id, UpdateUserDto dto) {
+        // get user by id
         User user = repository.findById(id)
-            .orElseThrow(() -> new RuntimeException("User not found"));
-
+            .orElseThrow(() -> new RuntimeException("user not found"));
+        
+        // it use mapper to set all dto attributes in the user object
         mapper.updateUserFromDto(dto, user);
-
-        return user;
+        
+        return mapper.toResponseDto(user);
     }
 
     public void delete(Long id) {
+        // delete user by id
         repository.deleteById(id);
     }
 }

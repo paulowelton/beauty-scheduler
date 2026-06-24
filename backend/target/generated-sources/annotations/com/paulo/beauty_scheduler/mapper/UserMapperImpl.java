@@ -2,13 +2,14 @@ package com.paulo.beauty_scheduler.mapper;
 
 import com.paulo.beauty_scheduler.dto.CreateUserDto;
 import com.paulo.beauty_scheduler.dto.UpdateUserDto;
+import com.paulo.beauty_scheduler.dto.UserResponseDto;
 import com.paulo.beauty_scheduler.entity.User;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-06-24T14:34:06-0300",
+    date = "2026-06-24T16:52:12-0300",
     comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.7 (Oracle Corporation)"
 )
 @Component
@@ -45,6 +46,26 @@ public class UserMapperImpl implements UserMapper {
         user.setPhone( dto.getPhone() );
 
         return user;
+    }
+
+    @Override
+    public UserResponseDto toResponseDto(User user) {
+        if ( user == null ) {
+            return null;
+        }
+
+        UserResponseDto userResponseDto = new UserResponseDto();
+
+        userResponseDto.setId( user.getId() );
+        userResponseDto.setName( user.getName() );
+        userResponseDto.setCpf( user.getCpf() );
+        userResponseDto.setEmail( user.getEmail() );
+        userResponseDto.setPhone( user.getPhone() );
+        if ( user.getRole() != null ) {
+            userResponseDto.setRole( user.getRole().name() );
+        }
+
+        return userResponseDto;
     }
 
     @Override
