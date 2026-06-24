@@ -2,6 +2,7 @@ package com.paulo.beauty_scheduler.service;
 
 import java.util.List;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.paulo.beauty_scheduler.dto.CreateUserDto;
@@ -14,21 +15,30 @@ import com.paulo.beauty_scheduler.repository.UserRepository;
 public class UserService {
     private final UserRepository repository;
     private final UserMapper mapper;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository repository, UserMapper mapper) {
+    public UserService(UserRepository repository, UserMapper mapper, BCryptPasswordEncoder passwordEncoder) {
         this.repository = repository;
         this.mapper = mapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public List<User> getAll() {
+        // getting all users
         return repository.findAll();
     }
 
     public User create(CreateUserDto dto) {
+        // dto to object
         User user = mapper.toEntity(dto);
 
+        // setting crypted password
+        user.setPassword(passwordEncoder.encode(dto.getPassword()));
+
+        // setting user role
         user.setRole(UserRole.CUSTOMER);
 
+        // saving user in database
         return repository.save(user);
     }
 }
