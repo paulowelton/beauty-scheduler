@@ -1,5 +1,8 @@
 package com.paulo.beauty_scheduler.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.paulo.beauty_scheduler.enums.UserRole;
 
 import jakarta.persistence.*;
@@ -34,7 +37,8 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
-    private UserRole role;
+    private Set<UserRole> roles = new HashSet<>();
 
 }

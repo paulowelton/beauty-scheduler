@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import com.paulo.beauty_scheduler.dto.CreateUserDto;
 import com.paulo.beauty_scheduler.dto.UpdateUserDto;
 import com.paulo.beauty_scheduler.dto.UserResponseDto;
-import com.paulo.beauty_scheduler.entity.User;
 import com.paulo.beauty_scheduler.service.UserService;
 
 import jakarta.validation.Valid;

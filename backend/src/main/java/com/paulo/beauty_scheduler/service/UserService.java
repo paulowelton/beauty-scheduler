@@ -2,6 +2,7 @@ package com.paulo.beauty_scheduler.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,7 @@ public class UserService {
         // get all users
         List<User> users = repository.findAll();
 
+        // all user response dtos
         List<UserResponseDto> responseUsers = new ArrayList<>();
 
         for (User user : users) {
@@ -48,6 +50,16 @@ public class UserService {
     }
 
     public UserResponseDto create(CreateUserDto dto) {
+        User user = createUser(dto, Set.of(UserRole.CUSTOMER));
+
+        return mapper.toResponseDto(user);
+    }
+
+    public User createUser(CreateUserDto dto, Set<UserRole> roles) {
+        if (repository.existsByEmail(dto.getEmail())) {
+            throw new RuntimeException("Email already exists.");
+        }
+
         // tranform dto to object
         User user = mapper.toEntity(dto);
 
@@ -55,12 +67,10 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
 
         // set user role
-        user.setRole(UserRole.CUSTOMER);
+        user.setRoles(roles);
 
         // save user in database
-        repository.save(user);
-
-        return mapper.toResponseDto(user);
+        return repository.save(user);
     }
 
     public UserResponseDto patch(Long id, UpdateUserDto dto) {

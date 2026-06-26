@@ -4,6 +4,7 @@ C:\Users\tecnologia8\Documents\beauty-scheduler\backend\src\main\java\com\paulo\
 C:\Users\tecnologia8\Documents\beauty-scheduler\backend\src\main\java\com\paulo\beauty_scheduler\dto\CreateUserDto.java
 C:\Users\tecnologia8\Documents\beauty-scheduler\backend\src\main\java\com\paulo\beauty_scheduler\dto\UpdateUserDto.java
 C:\Users\tecnologia8\Documents\beauty-scheduler\backend\src\main\java\com\paulo\beauty_scheduler\dto\UserResponseDto.java
+C:\Users\tecnologia8\Documents\beauty-scheduler\backend\src\main\java\com\paulo\beauty_scheduler\entity\Professional.java
 C:\Users\tecnologia8\Documents\beauty-scheduler\backend\src\main\java\com\paulo\beauty_scheduler\entity\User.java
 C:\Users\tecnologia8\Documents\beauty-scheduler\backend\src\main\java\com\paulo\beauty_scheduler\enums\UserRole.java
 C:\Users\tecnologia8\Documents\beauty-scheduler\backend\src\main\java\com\paulo\beauty_scheduler\mapper\UserMapper.java
